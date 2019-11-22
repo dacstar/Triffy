@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from api.models import create_profile, Profile, Balance
 from api.serializers import ProfileSerializer
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
 from datetime import datetime, timedelta
 from pytz import timezone
 
@@ -84,12 +86,13 @@ def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = User.objects.filter(username=username).filter(password=password)
-        if user:
-            print(user)
-            return Response(status=HTTP_200_OK)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            data = {'user': user.username, 'id':user.id}
+            return Response(data=data, status=status.HTTP_200_OK)
         else:
-            return Response(status=HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def users(request):

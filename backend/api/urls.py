@@ -5,6 +5,7 @@ from api.views import pre_travel_views
 
 urlpatterns = [
     path('auth/signup/', auth_views.signup, name='sign_up'),
+    path('auth/signin/', auth_views.signin, name='sign_in'),
     url('users/$', auth_views.users, name='users'),
     url('get_balance/$', pre_travel_views.get_balance, name='get _balance'),
     url('checkList/$', pre_travel_views.checkList, name='check_list'),

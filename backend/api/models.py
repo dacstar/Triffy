@@ -28,6 +28,8 @@ class Balance(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     account = models.CharField(max_length=20, blank=True)
+    name = models.CharField(max_length=100, default='')
+    interest = models.FloatField(default=0.0)
     goal_amount = models.IntegerField(blank=True)
     now_amount = models.IntegerField(blank=True)
     start_date = models.CharField(max_length=30, default='')

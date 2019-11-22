@@ -89,7 +89,12 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            data = {'user': user.username, 'id':user.id}
+            balance = Balance.objects.get(user_id=user)
+            if balance is not None:
+                check = True
+            else:
+                check = False
+            data = {'user': user.username, 'id':user.id, 'check_balance': check}
             return Response(data=data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)

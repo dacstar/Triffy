@@ -9,7 +9,7 @@ from pytz import timezone
 @api_view(['POST'])
 def get_balance(request):
     if request.method == 'POST':
-        user_id = request.POST('id')
+        user_id = request.POST['id']
         balance = Balance.objects.get(user_id=user_id)
         data = {
             'account': balance.account,

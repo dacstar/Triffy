@@ -23,11 +23,21 @@ def signup(request):
         profile = create_profile(username=username, password=password, age=age, gender=gender, ssn=ssn)
         accounts = profile.get('accounts', None)
         account = accounts.get('account', None)
-        now_amount = accounts.get('now_amount', None)
-        start_date = accounts.get('start', None)
-        end_date = accounts.get('end', None)
-        goal_amount = accounts.get('goal_amount', None)
-        balance = Balance.objects.create(user_id=profile.user, account=account, now_amount=now_amount, goal_amount=goal_amount, start_date=start_date, end_date=end_date)
+        if account == "230221966424":
+            name = '신한 S힐링 여행적금'
+            now_amount = 1600000
+            start_date = "20190927"
+            end_date = "20200427"
+            goal_amount = 2000000
+            interest = 1.85
+        else:
+            name = accounts.get('name', None)
+            now_amount = accounts.get('now_amount', None)
+            start_date = accounts.get('start', None)
+            end_date = accounts.get('end', None)
+            goal_amount = accounts.get('goal_amount', None)
+            interest = accounts.get('interest', None)
+        balance = Balance.objects.create(user_id=profile.user, account=account, name=name, now_amount=now_amount, goal_amount=goal_amount, start_date=start_date, end_date=end_date)
 
         return Response(status=status.HTTP_201_CREATED)
 

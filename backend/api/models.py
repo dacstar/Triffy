@@ -71,6 +71,7 @@ class Program(models.Model):
 
 class Calendar(models.Model):
     id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=10)
     time_now = models.DateField(blank=True)
     content = models.CharField(max_length=10)

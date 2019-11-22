@@ -13,7 +13,6 @@ from pytz import timezone
 @api_view(['POST', 'GET'])
 def signup(request):
     if request.method == 'POST':
-        print("====")
         # front에서 회원가입 할 때에 'http://10.3.17.61:8080/v1/account/list'에서 받은 계좌번호를 'http://10.3.17.61:8080/v1/account/deposit/detail'에 요청하여 계좌정보 profiles에 추가하여 받음
         username = request.POST['username']
         password = request.POST['password']
@@ -32,30 +31,31 @@ def signup(request):
         "거래구분":"9",
         "계좌감추기여부":"1",
         "보안계좌조회구분":"2",
-        "주민등록번호":"WmokLBDCO9/yfihlYoJFyg=="
+        "주민등록번호":ssn
         }
         }
         url = 'http://10.3.17.61:8080/v1/account/list'
         account = requests.post(url, data=json.dumps(params)).json()
         if account['dataBody']['고객성명'] == "홍길동":
             params = {
-            "dataHeader":
-            {
-            },
-            "dataBody":
-            {
-            "serviceCode":"D1130",
-            "정렬구분":"1",
-            "조회시작일":"20190228",
-            "조회종료일":"20190830",
-            "조회기간구분":"1",
-            "은행구분":"1",
-            "계좌번호":"230221966424"
-            }
+                "dataHeader":
+                {
+                },
+                "dataBody":
+                {
+                "serviceCode":"D1130",
+                "정렬구분":"1",
+                "조회시작일":"20190228",
+                "조회종료일":"20190830",
+                "조회기간구분":"1",
+                "은행구분":"1",
+                "계좌번호":"230221966424"
+                }
             }
             url = 'http://10.3.17.61:8080/v1/account/deposit/detail'
             account = requests.post(url, data=json.dumps(params)).json()
             if account['dataBody']['계좌번호'] == '230221966424':
+                account = account['dataBody']['계좌번호']
                 name = '신한 S힐링 여행적금'
                 now_amount = 1600000
                 start_date = "20190927"
@@ -63,21 +63,33 @@ def signup(request):
                 goal_amount = 2000000
                 interest = 1.85
         else:
-            name = request.POST.get('name', None)
+            name = '신한 S힐링 여행적금'
+            # 최초 납입금액 입력 받기
             now_amount = int(request.POST.get('now_amount', None))
-            start_date = request.POST.get('start', None)
+            start_dateP = request.POST.get('start', None)
             end_date = request.POST.get('end', None)
             # 만기금액(goal_amount) 구하기
             months = 0
             months += (int(end_date[:4]) - int(start_date[:4])) * 12
             months += (int(end_date[4:6]) - int(end_date[4:6])) + 1
             cnt = accounts.get('cnt', None)
-            goal_amount = (int(now_amount) // cnt) * months
-            interest = float(request.POST.get('interest', None))
-        balance = Balance.objects.create(user_id=profile.user, account=account, name=name, now_amount=now_amount, goal_amount=goal_amount, start_date=start_date, end_date=end_date)
+            goal_amount = int(now_amount) * months
+            interest = float(request.OST.get('interest', None))
+        balance = Balance.objects.create(user_id=profile.user, account=account, interest=interest, name=name, now_amount=now_amount, goal_amount=goal_amount, start_date=start_date, end_date=end_date)
 
         return Response(status=status.HTTP_201_CREATED)
 
+@api_view(['POST'])
+def signin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = User.objects.filter(username=username).filter(password=password)
+        if user:
+            print(user)
+            return Response(status=HTTP_200_OK)
+        else:
+            return Response(status=HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def users(request):

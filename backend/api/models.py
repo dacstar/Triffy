@@ -21,6 +21,16 @@ def create_profile(**kwargs):
         age=kwargs['age'],
         ssn=kwargs['ssn']
     )
+
+    checkList = CheckList.objects.create(
+        user=user,
+        title='항공권 예약'
+    )
+
+    checkList = CheckList.objects.create(
+        user=user,
+        title='숙박 예약'
+    )
     return profile
 
 
@@ -67,3 +77,8 @@ class Calendar(models.Model):
     money = models.IntegerField(blank=True)
     card = models.BooleanField()
     spent = models.BooleanField()
+
+class CheckList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.CharField(max_length=100, default='')
+    checked = models.BooleanField(default=False)

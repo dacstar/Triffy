@@ -15,7 +15,7 @@ def signup(request):
         # front에서 회원가입 할 때에 'http://10.3.17.61:8080/v1/account/list'에서 받은 계좌번호를 'http://10.3.17.61:8080/v1/account/deposit/detail'에 요청하여 계좌정보 profiles에 추가하여 받음
         username = profile.get('username', None)
         password = profile.get('password', None)
-        age = profile.get('age', None)
+        age = int(profile.get('age', None))
         gender = profile.get('gender', None)
         ssn = profile.get('ssn', None)
 
@@ -32,11 +32,16 @@ def signup(request):
             interest = 1.85
         else:
             name = accounts.get('name', None)
-            now_amount = accounts.get('now_amount', None)
+            now_amount = int(accounts.get('now_amount', None))
             start_date = accounts.get('start', None)
             end_date = accounts.get('end', None)
-            goal_amount = accounts.get('goal_amount', None)
-            interest = accounts.get('interest', None)
+            # 만기금액(goal_amount) 구하기
+            months = 0
+            months += (int(end_date[:4]) - int(start_date[:4])) * 12
+            months += (int(end_date[4:6]) - int(end_date[4:6])) + 1
+            cnt = accounts.get('cnt', None)
+            goal_amount = (int(now_amount) // cnt) * months
+            interest = float(accounts.get('interest', None))
         balance = Balance.objects.create(user_id=profile.user, account=account, name=name, now_amount=now_amount, goal_amount=goal_amount, start_date=start_date, end_date=end_date)
 
         return Response(status=status.HTTP_201_CREATED)

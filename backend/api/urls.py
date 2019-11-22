@@ -11,5 +11,5 @@ urlpatterns = [
     url('delete_item/', pre_travel_views.delete_item, name='delete_item'),
     url('edit_item/', pre_travel_views.edit_item, name='edit_item'),
 
-    
+    url('test/', pre_travel_views.test, name='name'),
 ]

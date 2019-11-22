@@ -14,7 +14,7 @@ def signup(request):
         # front에서 회원가입 할 때에 'http://10.3.17.61:8080/v1/account/list'에서 받은 계좌번호를 'http://10.3.17.61:8080/v1/account/deposit/detail'에 요청하여 계좌정보 profiles에 추가하여 받음
         username = request.POST['username']
         password = request.POST['password']
-        age = request.POST['age']
+        age = int(request.POST['age'])
         gender = request.POST['gender']
         ssn = request.POST['ssn']
         # Balnce model 저장
@@ -29,11 +29,16 @@ def signup(request):
             interest = 1.85
         else:
             name = request.POST.get('name', None)
-            now_amount = request.POST.get('now_amount', None)
+            now_amount = int(request.POST.get('now_amount', None))
             start_date = request.POST.get('start', None)
             end_date = request.POST.get('end', None)
-            goal_amount = request.POST.get('goal_amount', None)
-            interest = request.POST.get('interest', None)
+            # 만기금액(goal_amount) 구하기
+            months = 0
+            months += (int(end_date[:4]) - int(start_date[:4])) * 12
+            months += (int(end_date[4:6]) - int(end_date[4:6])) + 1
+            cnt = accounts.get('cnt', None)
+            goal_amount = (int(now_amount) // cnt) * months
+            interest = float(request.POST.get('interest', None))
         balance = Balance.objects.create(user_id=profile.user, account=account, name=name, now_amount=now_amount, goal_amount=goal_amount, start_date=start_date, end_date=end_date)
 
         return Response(status=status.HTTP_201_CREATED)

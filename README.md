@@ -1,2 +1,2 @@
 # Triffy
-ha
+hackathon

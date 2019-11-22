@@ -10,7 +10,6 @@ from pytz import timezone
 
 @api_view(['POST', 'GET'])
 def signup_many(request):
-
     if request.method == 'POST':
         profiles = request.data.get('profiles', None)
         for profile in profiles:

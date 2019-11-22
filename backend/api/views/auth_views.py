@@ -9,17 +9,25 @@ from pytz import timezone
 
 
 @api_view(['POST', 'GET'])
-def signup_many(request):
+def signup(request):
     if request.method == 'POST':
-        profiles = request.data.get('profiles', None)
-        for profile in profiles:
-            username = profile.get('username', None)
-            password = profile.get('password', None)
-            age = profile.get('age', None)
-            gender = profile.get('gender', None)
-            ssn = profile.get('ssn', None)
+        profile = request.data.get('profile', None)
+        # front에서 회원가입 할 때에 'http://10.3.17.61:8080/v1/account/list'에서 받은 계좌번호를 'http://10.3.17.61:8080/v1/account/deposit/detail'에 요청하여 계좌정보 profiles에 추가하여 받음
+        username = profile.get('username', None)
+        password = profile.get('password', None)
+        age = profile.get('age', None)
+        gender = profile.get('gender', None)
+        ssn = profile.get('ssn', None)
 
-            create_profile(username=username, password=password, age=age, gender=gender, ssn=ssn)
+        # Balnce model 저장
+        profile = create_profile(username=username, password=password, age=age, gender=gender, ssn=ssn)
+        accounts = profile.get('accounts', None)
+        account = accounts.get('account', None)
+        now_amount = accounts.get('now_amount', None)
+        start_date = accounts.get('start', None)
+        end_date = accounts.get('end', None)
+        goal_amount = accounts.get('goal_amount', None)
+        balance = Balance.objects.create(user_id=profile.user, account=account, now_amount=now_amount, goal_amount=goal_amount, start_date=start_date, end_date=end_date)
 
         return Response(status=status.HTTP_201_CREATED)
 

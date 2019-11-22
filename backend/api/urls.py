@@ -2,6 +2,6 @@ from django.conf.urls import url
 from api.views import auth_views
 
 urlpatterns = [
-    url('auth/signup-many/$', auth_views.signup_many, name='sign_up_many'),
+    url('auth/signup/$', auth_views.signup, name='sign_up'),
     url('users/$', auth_views.users, name='users')
 ]

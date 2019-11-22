@@ -19,6 +19,7 @@ def create_profile(**kwargs):
         user=user,
         gender=kwargs['gender'],
         age=kwargs['age'],
+        ssn=kwargs['ssn']
     )
     return profile
 
@@ -63,4 +64,3 @@ class Calendar(models.Model):
     money = models.IntegerField(blank=True)
     card = models.BooleanField()
     spent = models.BooleanField()
-    

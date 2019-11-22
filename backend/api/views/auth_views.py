@@ -1,3 +1,5 @@
+import requests
+import json
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -11,6 +13,7 @@ from pytz import timezone
 @api_view(['POST', 'GET'])
 def signup(request):
     if request.method == 'POST':
+        print("====")
         # front에서 회원가입 할 때에 'http://10.3.17.61:8080/v1/account/list'에서 받은 계좌번호를 'http://10.3.17.61:8080/v1/account/deposit/detail'에 요청하여 계좌정보 profiles에 추가하여 받음
         username = request.POST['username']
         password = request.POST['password']
@@ -19,14 +22,46 @@ def signup(request):
         ssn = request.POST['ssn']
         # Balnce model 저장
         profile = create_profile(username=username, password=password, age=age, gender=gender, ssn=ssn)
-        account = request.POST['account']
-        if account == "230221966424":
-            name = '신한 S힐링 여행적금'
-            now_amount = 1600000
-            start_date = "20190927"
-            end_date = "20200427"
-            goal_amount = 2000000
-            interest = 1.85
+
+        params = {
+        "dataHeader":
+        {},
+        "dataBody":
+        {
+        "serviceCode":"C2010",
+        "거래구분":"9",
+        "계좌감추기여부":"1",
+        "보안계좌조회구분":"2",
+        "주민등록번호":"WmokLBDCO9/yfihlYoJFyg=="
+        }
+        }
+        url = 'http://10.3.17.61:8080/v1/account/list'
+        account = requests.post(url, data=json.dumps(params)).json()
+        if account['dataBody']['고객성명'] == "홍길동":
+            params = {
+            "dataHeader":
+            {
+            },
+            "dataBody":
+            {
+            "serviceCode":"D1130",
+            "정렬구분":"1",
+            "조회시작일":"20190228",
+            "조회종료일":"20190830",
+            "조회기간구분":"1",
+            "은행구분":"1",
+            "계좌번호":"230221966424"
+            }
+            }
+            url = 'http://10.3.17.61:8080/v1/account/deposit/detail'
+            account = requests.post(url, data=json.dumps(params)).json()
+            if account['dataBody']['계좌번호'] == '230221966424':
+                name = '신한 S힐링 여행적금'
+                now_amount = 1600000
+                start_date = "20190927"
+                end_date = "20200427"
+                goal_amount = 2000000
+                interest = 1.85
         else:
             name = request.POST.get('name', None)
             now_amount = int(request.POST.get('now_amount', None))

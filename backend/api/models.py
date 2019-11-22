@@ -24,12 +24,12 @@ def create_profile(**kwargs):
 
     checkList = CheckList.objects.create(
         user=user,
-        title='항공권 예약'
+        content='항공권 예약'
     )
 
     checkList = CheckList.objects.create(
         user=user,
-        title='숙박 예약'
+        content='숙박 예약'
     )
     return profile
 

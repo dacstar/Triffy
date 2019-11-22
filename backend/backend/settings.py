@@ -127,10 +127,10 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8080',
-    'http://localhost',
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'http://localhost:8080',
+#     'http://localhost',
+# )
 
 
 
@@ -153,5 +153,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = True

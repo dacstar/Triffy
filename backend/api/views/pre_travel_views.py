@@ -6,7 +6,17 @@ from django.contrib.auth.models import User
 from api.models import Profile, Balance, CheckList
 from pytz import timezone
 
-
+@api_view(['GET', 'POST'])
+def test(request):
+    if request.method == 'GET':
+        user_id = request.GET['user_id']
+        data = {'id': user_id}
+        return Response(data=data, status=HTTP_200_OK)
+    elif request.method == 'POST':
+        user_id = request.POST['user_id']
+        data = {'id': user_id}
+        return Response(data=data, status=HTTP_200_OK)
+        
 # 적금 상세내역 조회
 @api_view(['GET'])
 def get_balance(request):

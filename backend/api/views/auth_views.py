@@ -17,8 +17,9 @@ def signup_many(request):
             password = profile.get('password', None)
             age = profile.get('age', None)
             gender = profile.get('gender', None)
+            ssn = profile.get('ssn', None)
 
-            create_profile(username=username, password=password, age=age, gender=gender)
+            create_profile(username=username, password=password, age=age, gender=gender, ssn=ssn)
 
         return Response(status=status.HTTP_201_CREATED)
 

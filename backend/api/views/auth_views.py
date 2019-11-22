@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from api.models import create_profile, Profile
+from api.models import create_profile, Profile, Balance
 from api.serializers import ProfileSerializer
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta

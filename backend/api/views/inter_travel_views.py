@@ -70,14 +70,14 @@ def get_calendar(request):
                     if not Calendar.objects.filter(user_id=user, time_now=time_now, content=content, money=money):
                         result = Calendar.objects.create(user_id=user, category=category, time_now=time_now, content=content, money=money, card=card, spent=spent, currency=currency)
             calendars = Calendar.objects.filter(user_id=user)
-            result = {}
+            result = []
             for item in calendars:
                 serializer = CalendarSerializer(item)
                 tmp = serializer.data
-                if serializer.data['time_now'] in result:
-                    result[tmp['time_now']].append({'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']})
-                else:
-                    result[tmp['time_now']] = [{'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']}]
+                # if serializer.data['time_now'] in result:
+                result.append({'date': tmp['time_now'], 'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']})
+                # else:
+                #     result[tmp['time_now']] = [{'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']}]
             return Response(data=result, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)

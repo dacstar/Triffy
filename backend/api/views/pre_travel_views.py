@@ -117,7 +117,9 @@ def edit_item(request):
 def sub_balance(request):
     if request.method == 'POST':
         user = request.user
+        print(user)
         balance = Balance.objects.get(user_id = user)
+        user_id = request.POST['user_id']
         spent_amount = int(request.POST['spent_amount'])
         category = request.POST['category']
         balance.goal_amount -= spent_amount
@@ -146,17 +148,19 @@ def sub_balance(request):
 @api_view(['POST'])
 def reserve_airplane(request):
     if request.method == 'POST':
-        user = request.user
-        airplane = Airplane.objects.get(user_id=user)
-        data = {
-            'price': airplane.price,
-            'outdeparture': airplane.outdeparture,
-            'outarrival': airplane.outarrival,
-            'indeparture': airplane.indeparture,
-            'inarrival': airplane.inarrival,
-            'name': airplane.name
-        }
-        return Response(data=data, status=status.HTTP_200_OK)
+        if request.user.is_authenticated:
+            user = request.user
+            print(user)
+            airplane = Airplane.objects.get(user_id=user)
+            data = {
+                'price': airplane.price,
+                'outdeparture': airplane.outdeparture,
+                'outarrival': airplane.outarrival,
+                'indeparture': airplane.indeparture,
+                'inarrival': airplane.inarrival,
+                'name': airplane.name
+            }
+            return Response(data=data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def get_exchange(request):

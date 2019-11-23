@@ -600,7 +600,7 @@
 
 - input
 
-  ![img](images/선택한 항공권 저장.PNG)
+  ![img](images/선택한항공권저장.PNG)
 
 - output 없음
 
@@ -610,7 +610,7 @@
 
 - input
 
-  ![img](images/숙박 저장.PNG)
+  ![img](images/숙박저장.PNG)
 
 - output 없음
 
@@ -620,11 +620,11 @@
 
 - input
 
-  ![img](images/숙박 조회.PNG)
+  ![img](images/숙박조회.PNG)
 
 - output
 
-  ![img](images/숙박 조회 결과.PNG)
+  ![img](images/숙박조회결과.PNG)
 
 4) http://10.3.17.166:8000/api/show_reserve_house/
 
@@ -632,11 +632,11 @@
 
 - input
 
-  ![img](images/저장한 숙박 조회.PNG)
+  ![img](images/저장한숙박조회.PNG)
 
 - output
 
-  ![img](images/저장한 숙박 조회 결과.PNG)
+  ![img](images/저장한숙박조회결과.PNG)
 
 5) http://10.3.17.166:8000/api/show_reserve_airline/
 
@@ -644,11 +644,11 @@
 
 - input
 
-  ![img](images/저장한 항공권 조회.PNG)
+  ![img](images/저장한항공권조회.PNG)
 
 - output
 
-  ![img](images/저장한 항공권 조회 결과.PNG)
+  ![img](images/저장한항공권조회결과.PNG)
 
 6) http://10.3.17.166:8000/api/show_airline/
 

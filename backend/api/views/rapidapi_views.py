@@ -1,13 +1,14 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from api.models import create_profile, Profile, Balance
+from api.models import create_profile, Profile, Balance, Airplane
 from api.serializers import ProfileSerializer
 from django.contrib.auth.models import User
 import requests
 
 
-@api_view(['GET'])
+#스카이스캐너에서 예약할 항공권 리스트를 뿌려줌
+@api_view(['GET','POST'])
 def show_airplane(request):
     if request.method == 'GET':
         destination = request.GET['destination']
@@ -60,6 +61,18 @@ def show_airplane(request):
             dat.update({i: data})
             i += 1
         return Response(data=dat, status=status.HTTP_200_OK)
+    # 스카이스캐너로 한 항목 선택을 하면 데이터베이스에 저장
+    if request.method == 'POST':
+        user_id = request.POST['user_id']
+        user = User.objects.get(username=user_id)
+        name = request.POST['name']
+        price = float(request.POST['price'])
+        outdeparture = request.POST['outdeparture']
+        indeparture = request.POST['indeparture']
+        outarrival = request.POST['outarrival']
+        inarrival = request.POST['inarrival']
+        Airplane(price=price, user_id=user, outdeparture=outdeparture, indeparture=indeparture, outarrival=outarrival, inarrival=inarrival, name=name).save()
+        return Response(status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])

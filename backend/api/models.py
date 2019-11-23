@@ -21,6 +21,16 @@ def create_profile(**kwargs):
         age=kwargs['age'],
         ssn=kwargs['ssn']
     )
+
+    checkList = CheckList.objects.create(
+        user=user,
+        content='항공권 예약'
+    )
+
+    checkList = CheckList.objects.create(
+        user=user,
+        content='숙박 예약'
+    )
     return profile
 
 
@@ -61,6 +71,7 @@ class Program(models.Model):
 
 class Calendar(models.Model):
     id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=10)
     time_now = models.DateField(blank=True)
     content = models.CharField(max_length=10)
@@ -71,8 +82,17 @@ class Calendar(models.Model):
 
 class Airplane(models.Model):
     id = models.AutoField(primary_key=True)
-    price = models.IntegerField(blank=True)
+    price = models.IntegerField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    departure = models.DateField(blank=True)
-    arrival = models.DateField(blank=True)
+    outdeparture = models.DateTimeField()
+    outarrival = models.DateTimeField()
+    indeparture = models.DateTimeField()
+    inarrival = models.DateTimeField()
+    name = models.CharField(max_length=30)
+
+
+class CheckList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.CharField(max_length=100, default='')
+    checked = models.BooleanField(default=False)
 

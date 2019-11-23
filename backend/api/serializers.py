@@ -1,4 +1,4 @@
-from .models import Profile, CheckList, Calendar, Airplane, Hotel
+from .models import Profile, CheckList, Calendar, Airplane, Hotel, Post
 from rest_framework import serializers
 
 
@@ -38,3 +38,12 @@ class HotelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hotel
         fields = ('name', 'price', 'arrival', 'departure')
+
+
+class PostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = ('id', 'writer', 'city', 'title', 'photo', 'content',
+                  'created_at', 'updated_at', 'agreement', 'like_users', 'like_count')
+

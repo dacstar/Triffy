@@ -53,15 +53,26 @@ class City(models.Model):
     country = models.CharField(max_length=10)
 
 
-class Posts(models.Model):
+class Post(models.Model):
     id = models.AutoField(primary_key=True)
-    city_id = models.ForeignKey(City, on_delete=models.CASCADE)
+    writer = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100, default='')
+    photo = models.CharField(max_length=150, default='')
+    content = models.TextField(default='')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    agreement = models.BooleanField(default=False)
+    like_users = models.ManyToManyField(User, related_name='like_posts')
 
+    @property
+    def like_count(self):
+        return self.like_users.count()
 
-class Likes(models.Model):
-    id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    post_id = models.ForeignKey(Posts, on_delete=models.CASCADE)
+# class Likes(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     post = models.ForeignKey(Posts, on_delete=models.CASCADE)
 
 
 class Program(models.Model):
@@ -80,7 +91,7 @@ class Calendar(models.Model):
     money = models.FloatField(blank=True)
     card = models.BooleanField()
     spent = models.BooleanField()
-    currency = models.CharField(max_length=10, default='won')
+    currency = models.CharField(max_length=10, default='원')
 
 
 class Airplane(models.Model):

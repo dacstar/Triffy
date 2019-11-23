@@ -8,7 +8,7 @@
 
 - input
 
-    ![img](images\EMB000020989996.bmp)  
+    ![img](images/EMB000020989996.bmp)  
 
 - output 없음
 
@@ -18,7 +18,7 @@
 
 - input
 
-    ![img](images\EMB00002098999b.bmp)  
+    ![img](images/EMB00002098999b.bmp)  
 
 - output
 
@@ -46,7 +46,7 @@
 
 - input
 
-    ![img](images\EMB0000209899a2.bmp)  
+    ![img](images/EMB0000209899a2.bmp)  
 
 - output
 
@@ -89,7 +89,7 @@
 
 - input
 
-    ![img](images\EMB0000209899b5.bmp)  
+    ![img](images/EMB0000209899b5.bmp)  
 
 - output
 
@@ -118,7 +118,7 @@
 
 - input
 
-    ![img](images\EMB0000209899bc.bmp)  
+    ![img](images/EMB0000209899bc.bmp)  
 
 - output
 
@@ -147,7 +147,7 @@
 
 - input
 
-    ![img](images\EMB0000209899c4.bmp)  
+    ![img](images/EMB0000209899c4.bmp)  
 
 - output
 
@@ -182,7 +182,7 @@
 
 - input
 
-    ![img](images\EMB0000209899cc.bmp)  
+    ![img](images/EMB0000209899cc.bmp)  
 
 - output
 
@@ -217,7 +217,7 @@
 
 - input
 
-    ![img](images\EMB0000209899d3.bmp)  
+    ![img](images/EMB0000209899d3.bmp)  
 
 - output
 
@@ -264,7 +264,7 @@
 
 - input
 
-    ![img](images\EMB0000209899e3.bmp)  
+    ![img](images/EMB0000209899e3.bmp)  
 
 - output
 
@@ -395,7 +395,7 @@
 
 - input(item_pk)
 
-    ![img](images\EMB0000209899f7.bmp)  
+    ![img](images/EMB0000209899f7.bmp)  
 
 - output
 
@@ -439,7 +439,7 @@
 
 - input
 
-    ![img](images\EMB0000209899ff.bmp)  
+    ![img](images/EMB0000209899ff.bmp)  
 
 - output
 
@@ -476,7 +476,7 @@
 
 - input
 
-    ![img](images\EMB000020989a06.bmp)  
+    ![img](images/EMB000020989a06.bmp)  
 
 - output
 
@@ -513,7 +513,7 @@
 
 - input
 
-    ![img](images\EMB000020989a0f.bmp)  
+    ![img](images/EMB000020989a0f.bmp)  
 
 - output 없음(response.status 200 리턴 받으면 포스팅 리스트 화면으로 가기)
 
@@ -564,7 +564,7 @@
 
 - input
 
-    ![img](images\EMB000020989a1b.bmp)  
+    ![img](images/EMB000020989a1b.bmp)  
 
 - output
 
@@ -596,7 +596,7 @@
 
 - input
 
-  ![img](images\선택한 항공권 저장.PNG)
+  ![img](images/선택한 항공권 저장.PNG)
 
 - output 없음
 
@@ -606,7 +606,7 @@
 
 - input
 
-  ![img](images\숙박 저장.PNG)
+  ![img](images/숙박 저장.PNG)
 
 - output 없음
 
@@ -616,11 +616,11 @@
 
 - input
 
-  ![img](images\숙박 조회.PNG)
+  ![img](images/숙박 조회.PNG)
 
 - output
 
-  ![img](images\숙박 조회 결과.PNG)
+  ![img](images/숙박 조회 결과.PNG)
 
 4) http://10.3.17.166:8000/api/show_reserve_house/
 
@@ -628,11 +628,11 @@
 
 - input
 
-  ![img](images\저장한 숙박 조회.PNG)
+  ![img](images/저장한 숙박 조회.PNG)
 
 - output
 
-  ![img](images\저장한 숙박 조회 결과.PNG)
+  ![img](images/저장한 숙박 조회 결과.PNG)
 
 5) http://10.3.17.166:8000/api/show_reserve_airline/
 
@@ -640,11 +640,11 @@
 
 - input
 
-  ![img](images\저장한 항공권 조회.PNG)
+  ![img](images/저장한 항공권 조회.PNG)
 
 - output
 
-  ![img](images\저장한 항공권 조회 결과.PNG)
+  ![img](images/저장한 항공권 조회 결과.PNG)
 
 6) http://10.3.17.166:8000/api/show_airline/
 
@@ -652,9 +652,9 @@
 
 - input
 
-  ![img](images\항공권검색.PNG)
+  ![img](images/항공권검색.PNG)
 
 - output
 
-  ![img](images\항공권검색결과.PNG)
+  ![img](images/항공권검색결과.PNG)
 

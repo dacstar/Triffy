@@ -7,7 +7,8 @@ urlpatterns = [
     # auth 관련 api
     path('auth/signup/', auth_views.signup, name='sign_up'),
     path('auth/signin/', auth_views.signin, name='sign_in'),
-    url('users/$', auth_views.users, name='users'),
+    path('auth/logout/', auth_views.logout, name='logout'),
+    # url('users/$', auth_views.users, name='users'),
 
     # pre_travel 관련 api
     url('get_balance/$', pre_travel_views.get_balance, name='get _balance'),

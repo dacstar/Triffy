@@ -12,5 +12,6 @@ urlpatterns = [
     path('check/', pre_travel_views.check, name='check'),
     path('delete_item/', pre_travel_views.delete_item, name='delete_item'),
     path('edit_item/', pre_travel_views.edit_item, name='edit_item'),
-    url('show_airplane/', rapidapi_views.show_airplane, name='show_airplane')
+    url('show_airplane/', rapidapi_views.show_airplane, name='show_airplane'),
+    url('show_house/', rapidapi_views.show_house, name='show_house')
 ]

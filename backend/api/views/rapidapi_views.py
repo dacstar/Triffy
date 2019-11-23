@@ -51,7 +51,7 @@ def show_airplane(request):
             agent = itinerarie['PricingOptions'][0]['Agents'][0]
             for ag in agents:
                 if agent == ag["Id"]:
-                    data.update({"name": ag['Name']})
+                    data.update({"name": ag['Name'], "img": ag['ImageUrl']})
                     break
             for leg in legs:
                 if inid == leg['Id']:
@@ -83,7 +83,7 @@ def show_house(request):
         departure_date = request.GET['departure_date']
         url = "https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete"
 
-        querystring = {"languagecode": "ko", "text": "losangeles"}
+        querystring = {"languagecode": "ko", "text": text}
 
         headers = {
             'x-rapidapi-host': "apidojo-booking-v1.p.rapidapi.com",
@@ -105,3 +105,16 @@ def show_house(request):
         }
 
         response = requests.request("GET", url, headers=headers, params=querystring)
+        results = response.json()['result']
+        data={}
+        i = 0
+        for result in results:
+            dat={}
+            dat.update({'photo_url':result['main_photo_url'],
+                        'min_price': result['min_total_price'],
+                        'review_score': result['review_score'],
+                        'hotel_name': result['hotel_name_trans']})
+            data.update({i: dat})
+            i += 1
+
+        return Response(data=data, status=status.HTTP_200_OK)

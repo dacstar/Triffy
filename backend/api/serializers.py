@@ -1,4 +1,4 @@
-from .models import Profile, CheckList, Calendar
+from .models import Profile, CheckList, Calendar, Airplane, Hotel
 from rest_framework import serializers
 
 
@@ -26,3 +26,15 @@ class CalendarSerializer(serializers.ModelSerializer):
         model = Calendar
         fields = ('id', 'user_id', 'category', 'time_now',
                   'content', 'money', 'card', 'spent', 'currency')
+
+
+class AirplaneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Airplane
+        fields = ('name', 'price', 'outdeparture', 'outarrival', 'indeparture', 'inarrival')
+
+
+class HotelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hotel
+        fields = ('name', 'price', 'arrival', 'departure')

@@ -30,5 +30,8 @@ urlpatterns = [
     # 항공권 조회 api
     url('show_airplane/', rapidapi_views.show_airplane, name='show_airplane'),
     url('save_airline/', rapidapi_views.save_airline, name='save_airline'),
-    url('show_house/', rapidapi_views.show_house, name='show_house')
+    url('show_house/', rapidapi_views.show_house, name='show_house'),
+    url('save_house/', rapidapi_views.save_house, name='save_house'),
+    url('show_reserve_airline/', rapidapi_views.show_reserve_airline, name='show_reserve_airline'),
+    url('show_reserve_hotel/', rapidapi_views.show_reserve_hotel, name='show_reserve_hotel')
 ]

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     gender = models.CharField(max_length=10, default='M')
@@ -91,6 +92,15 @@ class Airplane(models.Model):
     indeparture = models.DateTimeField()
     inarrival = models.DateTimeField()
     name = models.CharField(max_length=30)
+
+
+class Hotel(models.Model):
+    id = models.AutoField(primary_key=True)
+    price = models.IntegerField()
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    departure = models.DateField()
+    arrival = models.DateField()
+    name = models.CharField(max_length=100)
 
 
 class CheckList(models.Model):

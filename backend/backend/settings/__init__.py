@@ -25,7 +25,8 @@ SECRET_KEY = '*gj75=l@zkh1!c5(@-17gfex5$aq1j_bwqgbbzm-n2faj)*m6v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -137,7 +138,7 @@ CORS_ORIGIN_WHITELIST = (
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'Asia/Seoul'
 

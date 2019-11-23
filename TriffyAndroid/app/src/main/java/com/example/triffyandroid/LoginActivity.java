@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                     userInfo[0] = response.body();
                     Log.d("userInfo",userInfo[0].toString());
 
-                    Intent intent = new Intent(getApplicationContext(), MyBank.class);
+                    Intent intent = new Intent(getApplicationContext(), MyBankActivity.class);
                     intent.putExtra("user", userInfo[0].getUser());
                     intent.putExtra("id", userInfo[0].getId());
                     intent.putExtra("check_balance", userInfo[0].isCheck_balance());

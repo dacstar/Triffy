@@ -15,11 +15,11 @@ public class SsulActivity extends AppCompatActivity {
     }
 
     public void my_bank(View view){
-        startActivity(new Intent(getApplicationContext(), MyBank.class));
+        startActivity(new Intent(getApplicationContext(), MyBankActivity.class));
     }
 
     public void account_book(View view){
-        startActivity(new Intent(getApplicationContext(), AccountBook.class));
+        startActivity(new Intent(getApplicationContext(), AccountBookActivity.class));
     }
 
     public void trip(View view){

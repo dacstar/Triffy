@@ -23,7 +23,10 @@ public interface AirlineApi {
 
     @FormUrlEncoded
     @POST("check/sub_balance/")
-    Call<Balance> spentAmount(@Field("spent_amount") double spent_amount);
+    Call<Balance> spentAmount(
+            @Field("spent_amount") double spent_amount,
+            @Field("category") String air
+    );
 
     @FormUrlEncoded
     @POST("save_airline/")

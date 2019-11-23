@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.triffyandroid.Adapter.HotelAdapter;
 import com.example.triffyandroid.Api.CityApi;
@@ -116,11 +115,11 @@ public class CityActivity extends AppCompatActivity {
     }
 
     public void my_bank(View view){
-        startActivity(new Intent(getApplicationContext(), MyBank.class));
+        startActivity(new Intent(getApplicationContext(), MyBankActivity.class));
     }
 
     public void account_book(View view){
-        startActivity(new Intent(getApplicationContext(), AccountBook.class));
+        startActivity(new Intent(getApplicationContext(), AccountBookActivity.class));
     }
 
     public void ssul(View view){

@@ -50,7 +50,7 @@ public class AirlineActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Call<Balance> buyAirline = api.spentAmount(airlineAdapter.getItem(position).getPrice());
+                Call<Balance> buyAirline = api.spentAmount(airlineAdapter.getItem(position).getPrice(),"항공권");
                 buyAirline.enqueue(new Callback<Balance>() {
                     @Override
                     public void onResponse(Call<Balance> call, Response<Balance> response) {

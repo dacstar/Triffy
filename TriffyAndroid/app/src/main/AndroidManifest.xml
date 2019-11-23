@@ -18,9 +18,9 @@
             android:name=".CityActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".AirlineActivity" />
-        <activity android:name=".AccountBook" />
+        <activity android:name=".AccountBookActivity" />
         <activity
-            android:name=".MyBank"
+            android:name=".MyBankActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />

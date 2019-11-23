@@ -20,7 +20,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MyBank extends AppCompatActivity {
+public class MyBankActivity extends AppCompatActivity {
     ProgressBar myProgressBar;
     TextView myTextView, myBalance, myPercent;
     Button search_btn;
@@ -106,7 +106,7 @@ public class MyBank extends AppCompatActivity {
     }
 
     public void account_book(View view){
-        Intent bookintent = new Intent(getApplicationContext(), AccountBook.class);
+        Intent bookintent = new Intent(getApplicationContext(), AccountBookActivity.class);
         bookintent.putExtra("user_id", intent.getExtras().getString("user"));
         startActivity(bookintent);
     }

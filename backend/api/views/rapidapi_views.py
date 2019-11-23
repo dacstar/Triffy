@@ -139,7 +139,7 @@ def show_reserve_airline(request):
         user_id = request.POST['user_id']
         user = User.objects.get(username=user_id)
         date = datetime.date.today()
-        airline = Airplane.objects.filter(user_id=user).filter(outdeparture__gt=date)
+        airline = Airplane.objects.filter(user_id=user).filter(outdeparture__gt=date).order_by('-id')[:1]
         serializer = AirplaneSerializer(airline, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -149,6 +149,6 @@ def show_reserve_hotel(request):
     user_id = request.POST['user_id']
     user = User.objects.get(username=user_id)
     date = datetime.date.today()
-    hotel = Hotel.objects.filter(user_id=user).filter(arrival__gt=date)
+    hotel = Hotel.objects.filter(user_id=user).filter(arrival__gt=date).order_by('-id')[:1]
     serializer = HotelSerializer(hotel, many=True)
     return Response(data=serializer.data, status=status.HTTP_200_OK)

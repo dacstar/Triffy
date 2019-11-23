@@ -81,5 +81,5 @@ class Calendar(models.Model):
 
 class CheckList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.CharField(max_length=100, default='')
+    content = models.TextField(default='')
     checked = models.BooleanField(default=False)

@@ -68,7 +68,7 @@ def signup(request):
             name = '신한 S힐링 여행적금'
             # 최초 납입금액 입력 받기
             now_amount = int(request.POST.get('now_amount', None))
-            start_dateP = request.POST.get('start', None)
+            start_date = request.POST.get('start', None)
             end_date = request.POST.get('end', None)
             # 만기금액(goal_amount) 구하기
             months = 0

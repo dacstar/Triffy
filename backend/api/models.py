@@ -79,7 +79,20 @@ class Calendar(models.Model):
     card = models.BooleanField()
     spent = models.BooleanField()
 
+
+class Airplane(models.Model):
+    id = models.AutoField(primary_key=True)
+    price = models.IntegerField()
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    outdeparture = models.DateTimeField()
+    outarrival = models.DateTimeField()
+    indeparture = models.DateTimeField()
+    inarrival = models.DateTimeField()
+    name = models.CharField(max_length=30)
+
+
 class CheckList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField(default='')
     checked = models.BooleanField(default=False)
+

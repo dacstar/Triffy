@@ -20,13 +20,13 @@ def get_calendar(request):
                                       'money': item.money, 'card': item.card, 'spent': item.spent})
 
             else:
-                data[time_now] = [{'category': item.category, 'content': item.content,
+                data['time_now'] = [{'category': item.category, 'content': item.content,
                                    'money': item.money, 'card': item.card, 'spent': item.spent}]
-        return Response(data=data, status=HTTP_200_OK)
+        return Response(data=data, status=status.HTTP_200_OK)
 
 # category 별로 분류하여 합산, 소비자 리포트 생성 및 리턴
 @api_view(['GET'])
-def by_category(requst):
+def by_category(request):
     user_id = request.GET['user_id']
     data = {}
     calendars = list(Calendar.objects.filter(
@@ -35,11 +35,11 @@ def by_category(requst):
         if item.category in data:
             data.category += item.money
         else:
-            data[category] = item.money
+            data['category'] = item.money
 
     # category를 합산 금액에 따라 딕셔너리를 sorting
     res = sorted(data.items(), key=(lambda x: x[1]), reverse=True)
-    return Response(data=res, status=HTTP_200_OK)
+    return Response(data=res, status=status.HTTP_200_OK)
 
 # calendar item 생성하기(spent가 true면 이미 소비한 내역, false면 소비계획)
 @api_view(['POST'])

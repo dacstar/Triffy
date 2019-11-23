@@ -191,7 +191,9 @@ def add_item(request):
         if request.user.is_authenticated:
             user = request.user
             category = request.POST.get('category', None)
-            time_now = str(datetime.now())[:10]
+            # time_now = str(datetime.now())[:10]
+            time_now = request.POST['time_now']
+            time_now = time_now[:4] + '-' + time_now[4:6] + '-' + time_now[6:8]
             content = request.POST['content']
             money = float(request.POST['money'])
             # card = request.POST.get('card', False)

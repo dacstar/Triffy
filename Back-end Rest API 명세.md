@@ -29,6 +29,9 @@
       "check_balance": true
   }
   ```
+  ```
+  
+  ```
 
 3) <http://10.3.17.166:8000/api/auth/logout/>
 
@@ -46,7 +49,8 @@
 
 - input
 
-      ![img](images/EMB00005ae4a42f.bmp)  
+    ![img](images/EMB00005ae4a42f.bmp)  
+
 
 - output
 

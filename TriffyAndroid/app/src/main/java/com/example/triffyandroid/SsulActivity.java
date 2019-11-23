@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class TripActivity extends AppCompatActivity {
+public class SsulActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trip);
+        setContentView(R.layout.activity_ssul);
     }
 
     public void my_bank(View view){
@@ -22,5 +22,7 @@ public class TripActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), AccountBook.class));
     }
 
-
+    public void trip(View view){
+        startActivity(new Intent(getApplicationContext(), CityActivity.class));
+    }
 }

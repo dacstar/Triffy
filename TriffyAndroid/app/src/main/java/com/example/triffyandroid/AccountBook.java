@@ -8,17 +8,24 @@ import android.view.View;
 
 public class AccountBook extends AppCompatActivity {
 
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_book);
-    }
 
-    public void my_bank(View view){
-        startActivity(new Intent(getApplicationContext(), MyBank.class));
+        intent = getIntent();
     }
 
     public void trip(View view){
-        startActivity(new Intent(getApplicationContext(), TripActivity.class));
+        Intent cityintent = new Intent(getApplicationContext(), CityActivity.class);
+        cityintent.putExtra("user_id", intent.getExtras().getString("user_id"));
+        startActivity(cityintent);
+    }
+
+    public void ssul(View view){
+        Intent ssulintent = new Intent(getApplicationContext(), SsulActivity.class);
+        ssulintent.putExtra("user_id", intent.getExtras().getString("user_id"));
+        startActivity(ssulintent);
     }
 }

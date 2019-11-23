@@ -175,12 +175,13 @@
             android:textColor="#3ec5f1"/>
 
         <Button
-            android:id="@+id/temp"
+            android:id="@+id/ssul"
             android:background="#FFFFFF"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="임시"
+            android:onClick="ssul"
+            android:text="후기"
             android:textColor="#3ec5f1"/>
     </LinearLayout>
 

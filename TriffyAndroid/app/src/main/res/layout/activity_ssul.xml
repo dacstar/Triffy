@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AccountBook"
+    tools:context=".SsulActivity"
     >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:text="가계부"
+        android:text="후기"
         android:background="#3ec5f1"
         android:textColor="#ffffffff"
         android:textSize="30sp"
@@ -20,9 +20,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="14"
+        android:layout_weight="12"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:inputType="textPersonName"
+            android:text="도시" />
+
+        <EditText
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:inputType="textPersonName"
+            android:text="제목" />
+
+        <EditText
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:inputType="textPersonName"
+            android:text="url" />
+
+        <EditText
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:inputType="textPersonName"
+            android:text="본문" />
+
+        <CheckBox
+            android:id="@+id/agreement"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="가계부공개" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#3ec5f1"
+            android:textColor="#ffffffff"
+            android:textSize="20sp"
+            android:text="등록" />
 
     </LinearLayout>
 
@@ -38,6 +86,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
+            android:onClick="my_bank"
             android:text="MY금융"
             android:textColor="#3ec5f1"
             />
@@ -48,6 +97,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
+            android:onClick="account_book"
             android:text="가계부"
             android:textColor="#3ec5f1"/>
 
@@ -67,7 +117,6 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:onClick="ssul"
             android:text="후기"
             android:textColor="#3ec5f1"/>
     </LinearLayout>

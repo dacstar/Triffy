@@ -8,18 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.triffyandroid.Api.AirlineApi;
 import com.example.triffyandroid.Api.BalanceApi;
-import com.example.triffyandroid.Model.Airline;
 import com.example.triffyandroid.Model.Balance;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +25,7 @@ public class MyBank extends AppCompatActivity {
     TextView myTextView, myBalance, myPercent;
     Button search_btn;
     EditText destination,outboundDate,inboundDate, cabinClass;
+    Intent intent;
 
     private Retrofit retrofit;
     private BalanceApi api;
@@ -60,19 +54,20 @@ public class MyBank extends AppCompatActivity {
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AirlineActivity.class);
-                intent.putExtra("destination",destination.getText().toString());
-                intent.putExtra("outboundDate",outboundDate.getText().toString());
-                intent.putExtra("inboundDate",inboundDate.getText().toString());
-                intent.putExtra("cabinClass",cabinClass.getText().toString());
-                startActivity(intent);
+                Intent Airline_intent = new Intent(getApplicationContext(), AirlineActivity.class);
+                Airline_intent.putExtra("user_id",intent.getExtras().getString("user"));
+                Airline_intent.putExtra("destination",destination.getText().toString());
+                Airline_intent.putExtra("outboundDate",outboundDate.getText().toString());
+                Airline_intent.putExtra("inboundDate",inboundDate.getText().toString());
+                Airline_intent.putExtra("cabinClass",cabinClass.getText().toString());
+                startActivity(Airline_intent);
 
             }
         });
     }
 
     public void getBalance(){
-        Intent intent = getIntent();
+        intent = getIntent();
         myProgressBar = (ProgressBar)findViewById(R.id.h_progressbar);
         myTextView = (TextView)findViewById(R.id.cureentValue);
         myBalance = (TextView)findViewById(R.id.balance);
@@ -111,11 +106,20 @@ public class MyBank extends AppCompatActivity {
     }
 
     public void account_book(View view){
-        startActivity(new Intent(getApplicationContext(), AccountBook.class));
+        Intent bookintent = new Intent(getApplicationContext(), AccountBook.class);
+        bookintent.putExtra("user_id", intent.getExtras().getString("user"));
+        startActivity(bookintent);
     }
 
     public void trip(View view){
-        startActivity(new Intent(getApplicationContext(), TripActivity.class));
+        Intent cityintent = new Intent(getApplicationContext(), CityActivity.class);
+        cityintent.putExtra("user_id", intent.getExtras().getString("user"));
+        startActivity(cityintent);
     }
 
+    public void ssul(View view){
+        Intent ssulintent = new Intent(getApplicationContext(), SsulActivity.class);
+        ssulintent.putExtra("user_id", intent.getExtras().getString("user"));
+        startActivity(ssulintent);
+    }
 }

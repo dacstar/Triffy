@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TripActivity"></activity>
+        <activity android:name=".ReserveActivity"></activity>
+        <activity android:name=".SsulActivity" />
+        <activity
+            android:name=".CityActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".AirlineActivity" />
         <activity android:name=".AccountBook" />
         <activity

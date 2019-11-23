@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from api.models import Profile, Balance, CheckList
+from api.serializers import ProfileSerializer, CheckListSerializer
 from pytz import timezone
         
 # 적금 상세내역 조회
@@ -33,7 +34,11 @@ def checkList(request):
         # user_id를 get요청하기
         user_id = request.POST['user_id']
         checklists = list(CheckList.objects.filter(user=User.objects.get(pk=user_id)))
-        data = {'items': checklists}
+        result = []
+        for item in checklists:
+            serializer = CheckListSerializer(item)
+            result.append(serializer.data)
+        data = {'items': result}
         return Response(data=data, status=status.HTTP_200_OK)
     
 # 체크리스트 아이템 추가하기({user_id, content})
@@ -44,6 +49,7 @@ def add_item(request):
         user = User.objects.get(user_id)
         item = CheckList(user=user, content=content, checked=False)
         checklists = list(CheckList.objects.filter(user=user))
+        print(checklists)
         data = {'items': checklists}
         return Response(data=data, status=status.HTTP_200_OK)
 

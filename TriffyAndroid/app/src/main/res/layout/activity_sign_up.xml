@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SignUpActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:text="Triffy"
+        android:background="#3ec5f1"
+        android:textColor="#ffffffff"
+        android:textSize="40sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:text="회원가입"
+        android:textColor="#3ec5f1"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/m_id"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:hint="아이디"/>
+
+    <EditText
+        android:id="@+id/m_password"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:inputType="textPassword"
+        android:hint="비밀번호"/>
+
+    <EditText
+        android:id="@+id/m_age"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:hint="나이" />
+
+    <EditText
+        android:id="@+id/m_gender"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:hint="성별" />
+
+    <EditText
+        android:id="@+id/m_number"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:hint="주민등록번호" />
+
+    <EditText
+        android:id="@+id/m_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:hint="여행적금" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="#ffffffff"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/b_cancel"
+            android:clickable="true"
+            android:onClick="b_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#3ec5f1"
+            android:layout_weight="10"
+            android:text="취소" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="#ffffffff"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/b_enroll"
+            android:clickable="true"
+            android:onClick="b_enroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#3ec5f1"
+            android:layout_weight="10"
+            android:text="확인" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:textColor="#ffffffff"
+        android:gravity="center"/>
+
+</LinearLayout>

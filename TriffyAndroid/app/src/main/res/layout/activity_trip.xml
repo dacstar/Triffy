@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TripActivity"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:text="관광지"
+        android:background="#3ec5f1"
+        android:textColor="#ffffffff"
+        android:textSize="30sp"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="12"
+        android:orientation="vertical">
+
+
+        <ListView
+            android:id="@+id/list_mountain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/my_bank"
+            android:background="#FFFFFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:onClick="my_bank"
+            android:text="MY금융"
+            android:textColor="#3ec5f1"
+            />
+
+        <Button
+            android:id="@+id/account_book"
+            android:background="#FFFFFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:onClick="account_book"
+            android:text="가계부"
+            android:textColor="#3ec5f1"/>
+
+        <Button
+            android:id="@+id/trip"
+            android:background="#FFFFFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="관광지"
+            android:textColor="#3ec5f1"/>
+
+        <Button
+            android:id="@+id/temp"
+            android:background="#FFFFFF"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="임시"
+            android:textColor="#3ec5f1"/>
+    </LinearLayout>
+
+</LinearLayout>

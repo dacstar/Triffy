@@ -45,6 +45,7 @@ class Balance(models.Model):
     start_date = models.CharField(max_length=30, default='')
     end_date = models.CharField(max_length=30, default='')
 
+
 class City(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)

@@ -8,13 +8,13 @@ import requests
 
 
 #스카이스캐너에서 예약할 항공권 리스트를 뿌려줌
-@api_view(['GET','POST'])
+@api_view(['POST'])
 def show_airplane(request):
-    if request.method == 'GET':
-        destination = request.GET['destination']
-        outboundDate = request.GET['outboundDate']
-        inboundDate = request.GET['inboundDate']
-        cabinClass = request.GET['cabinClass']
+    if request.method == 'POST':
+        destination = request.POST['destination']
+        outboundDate = request.POST['outboundDate']
+        inboundDate = request.POST['inboundDate']
+        cabinClass = request.POST['cabinClass']
         url = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0"
 
         payload = "inboundDate="+inboundDate+"&cabinClass="+cabinClass+"&country=KR&currency=KRW&locale=ko&originPlace=ICN-sky&destinationPlace="+destination+"-sky&outboundDate="+outboundDate+"&adults=1"
@@ -62,6 +62,10 @@ def show_airplane(request):
             i += 1
         return Response(data=dat, status=status.HTTP_200_OK)
     # 스카이스캐너로 한 항목 선택을 하면 데이터베이스에 저장
+
+
+@api_view(['POST'])
+def save_airline(request):
     if request.method == 'POST':
         user_id = request.POST['user_id']
         user = User.objects.get(username=user_id)
@@ -75,12 +79,12 @@ def show_airplane(request):
         return Response(status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def show_house(request):
-    if request.method == 'GET':
-        text = request.GET['text']
-        arrival_date = request.GET['arrival_date']
-        departure_date = request.GET['departure_date']
+    if request.method == 'POST':
+        text = request.POST['text']
+        arrival_date = request.POST['arrival_date']
+        departure_date = request.POST['departure_date']
         url = "https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete"
 
         querystring = {"languagecode": "ko", "text": text}

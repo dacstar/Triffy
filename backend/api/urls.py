@@ -1,12 +1,7 @@
 from django.conf.urls import url
 from django.urls import path
 from api.views import auth_views
-<<<<<<< HEAD
-from api.views import pre_travel_views
-from api.views import inter_travel_views
-=======
-from api.views import pre_travel_views, rapidapi_views
->>>>>>> dfccdf44ac4d5a1478251a793f7ad56a373a2d9a
+from api.views import pre_travel_views, inter_travel_views, rapidapi_views
 
 urlpatterns = [
     # auth 관련 api

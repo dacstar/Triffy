@@ -1,11 +1,10 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from api.models import create_profile, Profile, Balance, Airplane
-from api.serializers import ProfileSerializer
+from api.models import  Airplane, Hotel
 from django.contrib.auth.models import User
-import requests
-import json
+from api.serializers import AirplaneSerializer, HotelSerializer
+import requests, datetime
 
 
 #스카이스캐너에서 예약할 항공권 리스트를 뿌려줌
@@ -119,3 +118,37 @@ def show_house(request):
             data.append(dat)
 
         return Response(data=data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def save_house(request):
+    if request.method == 'POST':
+        user_id = request.POST['user_id']
+        user = User.objects.get(username=user_id)
+        name = request.POST['name']
+        price = float(request.POST['price'])
+        departure = request.POST['departure']
+        arrival = request.POST['arrival']
+        Hotel(price=price, user_id=user, departure=departure, arrival=arrival, name=name).save()
+        return Response(status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+def show_reserve_airline(request):
+    if request.method == 'POST':
+        user_id = request.POST['user_id']
+        user = User.objects.get(username=user_id)
+        date = datetime.date.today()
+        airline = Airplane.objects.filter(user_id=user).filter(outdeparture__gt=date)
+        serializer = AirplaneSerializer(airline, many=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def show_reserve_hotel(request):
+    user_id = request.POST['user_id']
+    user = User.objects.get(username=user_id)
+    date = datetime.date.today()
+    hotel = Hotel.objects.filter(user_id=user).filter(arrival__gt=date)
+    serializer = HotelSerializer(hotel, many=True)
+    return Response(data=serializer.data, status=status.HTTP_200_OK)

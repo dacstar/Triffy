@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Triffy"
+        android:background="#3ec5f1"
+        android:textColor="#ffffffff"
+        android:textSize="40sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:text="로그인"
+        android:textColor="#3ec5f1"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/ed_Id"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:inputType="textPersonName"
+        android:hint="username" />
+
+    <EditText
+        android:id="@+id/ed_password"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:inputType="textPassword"
+        android:hint="password" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_in"
+            android:background="#3ec5f1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:clickable="true"
+            android:onClick="bt_in"
+            android:text="로그인" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="#ffffffff"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/bt_up"
+            android:background="#3ec5f1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:clickable="true"
+            android:onClick="bt_up"
+            android:text="회원가입" />
+    </LinearLayout>
+
+</LinearLayout>

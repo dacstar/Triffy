@@ -78,6 +78,7 @@ class Calendar(models.Model):
     money = models.IntegerField(blank=True)
     card = models.BooleanField()
     spent = models.BooleanField()
+    currency = models.CharField(max_length=10, default='won')
 
 
 class Airplane(models.Model):

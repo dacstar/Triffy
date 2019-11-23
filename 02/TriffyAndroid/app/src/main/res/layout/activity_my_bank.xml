@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MyBank">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:text="MY금융"
+        android:background="#3ec5f1"
+        android:textColor="#ffffffff"
+        android:textSize="30sp"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cureentValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="적금 현황"
+                android:textColor="#3ec5f1"
+                android:textSize="20dp"
+                android:gravity="left" />
+
+            <TextView
+                android:id="@+id/balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:textColor="#3ec5f1"
+                android:textSize="40dp"
+                android:gravity="right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="원"
+                android:textColor="#3ec5f1"
+                android:textSize="20dp"
+                android:gravity="right" />
+
+
+        </LinearLayout>
+
+
+        <ProgressBar
+            android:id="@+id/h_progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressTint="#3ec5f1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/percent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="#3ec5f1"
+            android:textSize="15dp"
+            android:gravity="right"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="12"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="#f5f5dc"
+            android:text="항공권"/>
+
+        <EditText
+            android:id="@+id/destination"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:hint="공항3글자" />
+
+        <EditText
+            android:id="@+id/outboundDate"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:hint="출국일자(ex : 2019-12-01)" />
+
+        <EditText
+            android:id="@+id/inboundDate"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:hint="입국일자(ex : 2019-12-10)" />
+
+        <EditText
+            android:id="@+id/cabinClass"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:hint="클래스" />
+
+        <Button
+            android:id="@+id/search_btn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:background="#3ec5f1"
+            android:textSize="20dp"
+            android:textColor="#ffffff"
+            android:clickable="true"
+            android:text="검색" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="#f5f5dc"
+            android:text="숙박" />
+
+        <ListView
+            android:id="@+id/listitem_hotel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,10 +1,10 @@
 package com.example.triffyandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 
-import com.example.triffyandroid.Model.User;
-import com.example.triffyandroid.Service.UserService;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,8 +13,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        UserService userService = new UserService();
-        User user = new User("kkt1212","123",26,"M","124124-1212423","230221966424");
-        userService.UserRetrofit(user);
+        startLoading();
+
     }
+    private void startLoading() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, 2000);
+    }
+
 }

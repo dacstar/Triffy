@@ -17,6 +17,8 @@ urlpatterns = [
     path('check/add_item/', pre_travel_views.add_item, name='add_item'),
     path('check/delete_item/', pre_travel_views.delete_item, name='delete_item'),
     path('check/edit_item/', pre_travel_views.edit_item, name='edit_item'),
+    path('check/airplane/', pre_travel_views.reserve_airplane, name='reserve_airplane'),
+    path('check/sub_balance/', pre_travel_views.sub_balance, name='sub_balance'),
 
     # inter_travel 관련 api
     url('calendar/view/$', inter_travel_views.get_calendar, name='view_calendar'),
@@ -30,6 +32,8 @@ urlpatterns = [
     # post_travel 관련 api
     path('post/write/', post_travel_views.write_post, name='write_post'),
     path('post/list/', post_travel_views.post_list, name='post_list'),
+    path('post/like/', post_travel_views.like, name='like'),
+
     # 항공권 조회 api
     url('show_airplane/', rapidapi_views.show_airplane, name='show_airplane'),
     url('save_airline/', rapidapi_views.save_airline, name='save_airline'),

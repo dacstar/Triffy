@@ -28,7 +28,7 @@ def write_post(request):
 @api_view(['POST'])
 def post_list(request):
     if request.method == 'POST':
-        posts = Post.objects.all().order_by('like_users')
+        posts = Post.objects.all().order_by('-like_users')
         result = []
         for item in posts:
             serializer = PostSerializer(item)
@@ -46,7 +46,9 @@ def like(request):
                 post.like_users.remove(user)
             else:
                 post.like_users.add(user)
-            return Response(status=status.HTTP_200_OK)
+            post = Post.objects.get(pk=post_id)
+            serializer = PostSerializer(post)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 

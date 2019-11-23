@@ -64,6 +64,10 @@ class Post(models.Model):
     agreement = models.BooleanField(default=False)
     like_users = models.ManyToManyField(User, related_name='like_posts')
 
+    @property
+    def like_count(self):
+        return self.like_users.count()
+
 # class Likes(models.Model):
 #     id = models.AutoField(primary_key=True)
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)

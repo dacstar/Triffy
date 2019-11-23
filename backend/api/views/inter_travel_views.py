@@ -5,24 +5,23 @@ from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from api.models import Profile, Balance, CheckList, Calendar
 from pytz import timezone
+from api.serializers import CalendarSerializer
 
 # 사용자의 저장된 calendar 데이터 리턴하기
-@api_view(['GET'])
+@api_view(['POST'])
 def get_calendar(request):
-    if request.method == 'GET':
-        user_id = request.GET['user_id']
-        calendars = list(Calendar.objects.filter(
-            user_id=User.objects.get(pk=user_id)))
-        data = {}
+    if request.method == 'POST':
+        user = request.user
+        calendars = Calendar.objects.filter(user_id=user)
+        result = {}
         for item in calendars:
-            if item.time_now in data:
-                data.time_now.append({'category': item.category, 'content': item.content,
-                                      'money': item.money, 'card': item.card, 'spent': item.spent})
-
+            serializer = CalendarSerializer(item)
+            tmp = serializer.data
+            if serializer.data['time_now'] in result:
+                result[tmp['time_now']].append({'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']})
             else:
-                data[time_now] = [{'category': item.category, 'content': item.content,
-                                   'money': item.money, 'card': item.card, 'spent': item.spent}]
-        return Response(data=data, status=HTTP_200_OK)
+                result[tmp['time_now']] = [{'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']}]
+        return Response(data=result, status=status.HTTP_200_OK)
 
 # category 별로 분류하여 합산, 소비자 리포트 생성 및 리턴
 @api_view(['GET'])
@@ -45,4 +44,18 @@ def by_category(requst):
 @api_view(['POST'])
 def add_item(request):
     if request.method == 'POST':
-        pass
+        user = request.user
+        category = request.POST.get('category', None)
+        time_now = str(datetime.now())[:10]
+        content = request.POST['content']
+        money = int(request.POST['money'])
+        card = request.POST.get('card', False)
+        spent = request.POST.get('spent', True)
+        currency = request.POST.get('currency', 'won')
+        calendar = Calendar.objects.create(user_id=user, category=category, time_now=time_now, content=content, money=money, card=card, spent=spent, currency=currency)
+        calendars = list(Calendar.objects.filter(user_id=user))
+        result = []
+        for item in calendars:
+            serializer = CalendarSerializer(item)
+            result.append(serializer.data)
+        return Response(data=result, status=status.HTTP_200_OK)

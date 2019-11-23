@@ -87,7 +87,6 @@ def signin(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-        print('login', user)
         if user is not None:
             auth_login(request, user)
             balance = Balance.objects.get(user_id=user)

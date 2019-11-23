@@ -1,4 +1,4 @@
-from .models import Profile, CheckList
+from .models import Profile, CheckList, Calendar
 from rest_framework import serializers
 
 
@@ -20,3 +20,9 @@ class CheckListSerializer(serializers.ModelSerializer):
         model = CheckList
         fields = ('id', 'user', 'content', 'checked')
 
+
+class CalendarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Calendar
+        fields = ('id', 'user_id', 'category', 'time_now',
+                  'content', 'money', 'card', 'spent', 'currency')

@@ -29,4 +29,5 @@ urlpatterns = [
 
     # 항공권 조회 api
     url('show_airplane/', rapidapi_views.show_airplane, name='show_airplane'),
+    url('show_house/', rapidapi_views.show_house, name='show_house')
 ]

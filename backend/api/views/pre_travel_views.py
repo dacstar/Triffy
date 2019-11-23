@@ -119,12 +119,16 @@ def sub_balance(request):
         user = request.user
         balance = Balance.objects.get(user_id = user)
         spent_amount = int(request.POST['spent_amount'])
+        category = request.POST['category']
         balance.goal_amount -= spent_amount
         balance.now_amount -= spent_amount
         balance.save()
 
         # checklist 체크하기
-        check = list(CheckList.objects.filter(user=user, content='항공권 예약'))[0]
+        if category == '항공권':
+            check = list(CheckList.objects.filter(user=user, content='항공권 예약'))[0]
+        elif category == '숙박':
+            check = list(CheckList.objects.filter(user=user, content='숙박 예약'))[0]
         check.checked = True
         check.save()
         data = {

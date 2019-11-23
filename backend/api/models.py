@@ -67,3 +67,12 @@ class Calendar(models.Model):
     money = models.IntegerField(blank=True)
     card = models.BooleanField()
     spent = models.BooleanField()
+
+
+class Airplane(models.Model):
+    id = models.AutoField(primary_key=True)
+    price = models.IntegerField(blank=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    departure = models.DateField(blank=True)
+    arrival = models.DateField(blank=True)
+

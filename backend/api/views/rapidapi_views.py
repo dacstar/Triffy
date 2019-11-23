@@ -5,6 +5,7 @@ from api.models import create_profile, Profile, Balance, Airplane
 from api.serializers import ProfileSerializer
 from django.contrib.auth.models import User
 import requests
+import json
 
 
 #스카이스캐너에서 예약할 항공권 리스트를 뿌려줌
@@ -40,8 +41,7 @@ def show_airplane(request):
         legs = response.json()['Legs']
         agents = response.json()['Agents']
         itineraries = response.json()['Itineraries']
-        dat = {}
-        i = 0;
+        dat = []
         for itinerarie in itineraries:
             outid = itinerarie['OutboundLegId']
             inid = itinerarie['InboundLegId']
@@ -55,11 +55,10 @@ def show_airplane(request):
                     break
             for leg in legs:
                 if inid == leg['Id']:
-                    data.update({'in': {'departure': leg['Departure'], 'arrival': leg['Arrival']}})
+                    data.update({'indeparture': leg['Departure'], 'inarrival': leg['Arrival']})
                 if outid == leg['Id']:
-                    data.update({'out': {'departure': leg['Departure'], 'arrival': leg['Arrival']}})
-            dat.update({i: data})
-            i += 1
+                    data.update({'outdeparture': leg['Departure'], 'outarrival': leg['Arrival']})
+            dat.append(data)
         return Response(data=dat, status=status.HTTP_200_OK)
     # 스카이스캐너로 한 항목 선택을 하면 데이터베이스에 저장
 
@@ -110,15 +109,13 @@ def show_house(request):
 
         response = requests.request("GET", url, headers=headers, params=querystring)
         results = response.json()['result']
-        data={}
-        i = 0
+        data=[]
         for result in results:
             dat={}
             dat.update({'photo_url':result['main_photo_url'],
                         'min_price': result['min_total_price'],
                         'review_score': result['review_score'],
                         'hotel_name': result['hotel_name_trans']})
-            data.update({i: dat})
-            i += 1
+            data.append(dat)
 
         return Response(data=data, status=status.HTTP_200_OK)

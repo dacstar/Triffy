@@ -18,9 +18,9 @@ def get_calendar(request):
             serializer = CalendarSerializer(item)
             tmp = serializer.data
             if serializer.data['time_now'] in result:
-                result[tmp['time_now']].append({'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']})
+                result[tmp['time_now']].append({'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']})
             else:
-                result[tmp['time_now']] = [{'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']}]
+                result[tmp['time_now']] = [{'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']}]
         return Response(data=result, status=status.HTTP_200_OK)
 
 # category 별로 분류하여 합산, 소비자 리포트 생성 및 리턴
@@ -80,4 +80,85 @@ def add_item(request):
             result.append(serializer.data)
         return Response(data=result, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+def switch_spent(request):
+    if request.method == 'POST':
+        user = request.user
+        pk = request.POST['pk']
+        calendar = Calendar.objects.get(pk=pk)
+        if calendar.spent == True:
+            calendar.spent = False
+        else:
+            calendar.spent = True
+        calendar.save()
+        # calendar 목록 갱신
+        calendars = Calendar.objects.filter(user_id=user)
+        result = {}
+        for item in calendars:
+            serializer = CalendarSerializer(item)
+            tmp = serializer.data
+            if serializer.data['time_now'] in result:
+                result[tmp['time_now']].append({'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']})
+            else:
+                result[tmp['time_now']] = [{'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']}]
+        return Response(data=result, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+def delete_item(request):
+    if request.method == 'POST':
+        user = request.user
+        pk = request.POST['pk']
+        calendar = Calendar.objects.get(pk=pk)
+        calendar.delete()
+        # calendar 목록 갱신
+        calendars = Calendar.objects.filter(user_id=user)
+        result = {}
+        for item in calendars:
+            serializer = CalendarSerializer(item)
+            tmp = serializer.data
+            if serializer.data['time_now'] in result:
+                result[tmp['time_now']].append({'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']})
+            else:
+                result[tmp['time_now']] = [{'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']}]
+        return Response(data=result, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def edit_item(request):
+    if request.method == 'POST':
+        user = request.user
+        pk = request.POST['pk']
+        calendar = Calendar.objects.get(pk=pk)
+        category = request.POST.get('category', None)
+        content = request.POST.get('content', None)
+        money = request.POST.get('money', None)
+        card = request.POST.get('card', None)
+        spent = request.POST.get('spent', None)
+        currency = request.POST.get('currency', None)
+        if category is not None:
+            calendar.category = category
+        if content is not None:
+            calendar.content = content
+        if money is not None:
+            calendar.money = int(money)
+        if card is not None:
+            calendar.card = card
+        if spent is not None:
+            calendar.spent = spent
+        if currency is not None:
+            calendar.currency = currency
+        calendar.save()
+
+        # calendar 목록 갱신
+        calendars = Calendar.objects.filter(user_id=user)
+        result = {}
+        for item in calendars:
+            serializer = CalendarSerializer(item)
+            tmp = serializer.data
+            if serializer.data['time_now'] in result:
+                result[tmp['time_now']].append({'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']})
+            else:
+                result[tmp['time_now']] = [{'pk': tmp['id'], 'category': tmp['category'], 'content': tmp['content'], 'money': tmp['money'], 'card': tmp['card'], 'spent': tmp['spent'], 'currency': tmp['currency']}]
+        return Response(data=result, status=status.HTTP_200_OK)
+
+        
+        

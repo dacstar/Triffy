@@ -22,7 +22,10 @@ urlpatterns = [
     url('calendar/category/$', inter_travel_views.by_category, name='by_category'),
     path('calendar/add_item/', inter_travel_views.add_item, name='add_calendar'),
     path('calendar/card/', inter_travel_views.by_card, name='by_card'),
-    
+    path('calendar/switch_spent/', inter_travel_views.switch_spent, name='switch_spent'),
+    path('calendar/delete_item/', inter_travel_views.delete_item, name='delte_calendar'),
+    path('calendar/edit_item/', inter_travel_views.edit_item, name='edit_calendar'),
+
     # 항공권 조회 api
     url('show_airplane/', rapidapi_views.show_airplane, name='show_airplane'),
 ]

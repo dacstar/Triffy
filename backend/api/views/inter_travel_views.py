@@ -29,7 +29,6 @@ def get_calendar(request):
                 }
             }
             response = requests.post(url, data=json.dumps(params)).json()
-            print(response)
             if response["dataBody"]["grp001"]:
                 group = response["dataBody"]["grp001"]
                 for item in group:
@@ -37,11 +36,11 @@ def get_calendar(request):
                     if content == "택시":
                         category = "교통비"
                     money = float(item["aprvamt"].replace(',', ''))
-                    time_now = item["aprvtime"][:8]
-                    spend = True
+                    time_now = item["aprvtime"][:4] + '-' + item["aprvtime"][4:6] + '-' + item["aprvtime"][6:8]
+                    spent = True
                     currency = item["currency"]
                     card = True
-                    if not Calendar.objects.filter(user_id=user, time_now=timenow, content=content, money=money):
+                    if not Calendar.objects.filter(user_id=user, time_now=time_now, content=content, money=money):
                         result = Calendar.objects.create(user_id=user, category=category, time_now=time_now, content=content, money=money, card=card, spent=spent, currency=currency)
 
             # 체크카드 해외 사용내역 조회
@@ -57,7 +56,6 @@ def get_calendar(request):
                 }
             }
             response = requests.post(url, data=json.dumps(params)).json()
-            print(response)
             if response["dataBody"]["grp001"]:
                 group = response["dataBody"]["grp001"]
                 for item in group:
@@ -65,11 +63,11 @@ def get_calendar(request):
                     if content == "주차장":
                         category = "기타"
                     currency = item["loaTel"]
-                    time_now = item["apvDt"][:8]
+                    time_now = item["apvDt"][:4] + '-' + item["apvDt"][4:6] + '-' + item["apvDt"][6:8]
                     money = float(item["apva"])
                     card = True
                     spent = True
-                    if not Calendar.objects.filter(user_id=user, time_now=timenow, content=content, money=money):
+                    if not Calendar.objects.filter(user_id=user, time_now=time_now, content=content, money=money):
                         result = Calendar.objects.create(user_id=user, category=category, time_now=time_now, content=content, money=money, card=card, spent=spent, currency=currency)
             calendars = Calendar.objects.filter(user_id=user)
             result = {}
@@ -198,7 +196,7 @@ def add_item(request):
             money = float(request.POST['money'])
             # card = request.POST.get('card', False)
             spent = request.POST.get('spent', True)
-            currency = request.POST.get('currency', 'won')
+            currency = request.POST.get('currency', '원')
             calendar = Calendar.objects.create(user_id=user, category=category, time_now=time_now, content=content, money=money, card=card, spent=spent, currency=currency)
             calendars = list(Calendar.objects.filter(user_id=user))
             result = []

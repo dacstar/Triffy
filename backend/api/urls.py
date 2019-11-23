@@ -19,7 +19,8 @@ urlpatterns = [
     path('check/edit_item/', pre_travel_views.edit_item, name='edit_item'),
     path('check/airplane/', pre_travel_views.reserve_airplane, name='reserve_airplane'),
     path('check/sub_balance/', pre_travel_views.sub_balance, name='sub_balance'),
-
+    path('get_exchange/', pre_travel_views.get_exchange, name='get_exchange'),
+    
     # inter_travel 관련 api
     url('calendar/view/$', inter_travel_views.get_calendar, name='view_calendar'),
     url('calendar/category/$', inter_travel_views.by_category, name='by_category'),

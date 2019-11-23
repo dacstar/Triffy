@@ -1,3 +1,4 @@
+import requests, json
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -153,3 +154,31 @@ def reserve_airplane(request):
         }
         return Response(data=data, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+def get_exchange(request):
+    if request.method == 'POST':
+        url = 'http://10.3.17.61:8080/v1/search/realtime-fx/period'
+        currency = ["USD"]
+        result = []
+        tmp = str(datetime.now())
+        now_date = tmp[:10].replace('-', '.')
+        now_time = tmp[11:16]
+        for item in currency:
+            params = {
+                "dataHeader":
+                {
+                },
+                "dataBody":
+                {
+                "통화코드": item,
+                "serviceCode":"F3750",
+                "고시일자041":"20190618",
+                "고시일자042":"20190625"
+                }
+            }
+            exchange_rate = requests.post(url, data=json.dumps(params)).json()
+            exchange_rate = exchange_rate['dataBody']['조회내역'][-1]
+            data = {'buy': exchange_rate['지폐매입환율'], 'sell': exchange_rate['지폐매도환율'], 'currency': item, 'now_date': now_date, 'now_time': now_time}
+            result.append(data)
+        print(result)
+        return Response(data=result, status=status.HTTP_200_OK)

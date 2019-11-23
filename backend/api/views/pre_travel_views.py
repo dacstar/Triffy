@@ -7,7 +7,7 @@ from api.models import Profile, Balance, CheckList
 from api.serializers import ProfileSerializer, CheckListSerializer
 from pytz import timezone
         
-# 적금 상세내역 조회
+# 적금 상세내역 조회({'user_id'})
 @api_view(['POST'])
 def get_balance(request):
     if request.method == 'POST':
@@ -27,7 +27,7 @@ def get_balance(request):
         return Response(data=data, status=status.HTTP_200_OK)
 
 
-# 사용자가 저장한 체크리스트 아이템 리스트 가져오기
+# 사용자가 저장한 체크리스트 아이템 리스트 가져오기({'user_id'})
 @api_view(['POST'])
 def checkList(request):
     if request.method == 'POST':
@@ -42,15 +42,19 @@ def checkList(request):
         return Response(data=data, status=status.HTTP_200_OK)
     
 # 체크리스트 아이템 추가하기({user_id, content})
+@api_view(['POST'])
 def add_item(request):
     if request.method == 'POST':
         user_id = request.POST['user_id']
         content = request.POST['content']
-        user = User.objects.get(user_id)
-        item = CheckList(user=user, content=content, checked=False)
+        user = User.objects.get(pk=user_id)
+        item = CheckList.objects.create(user=user, content=content, checked=False)
         checklists = list(CheckList.objects.filter(user=user))
-        print(checklists)
-        data = {'items': checklists}
+        result = []
+        for item in checklists:
+            serializer = CheckListSerializer(item)
+            result.append(serializer.data)
+        data = {'items': result}
         return Response(data=data, status=status.HTTP_200_OK)
 
 # 해당 체크리스트 아이템 완료 체크 또는 해제({user_id, check_id})
@@ -66,31 +70,43 @@ def check(request):
             item.checked = False
         item.save()
         checklists = list(CheckList.objects.filter(user=User.objects.get(pk=user_id)))
-        data = {'items': checklists}
+        result = []
+        for item in checklists:
+            serializer = CheckListSerializer(item)
+            result.append(serializer.data)
+        data = {'items': result}
         return Response(data=data, status=status.HTTP_200_OK)
 
 # 해당 체크리스트 아이템 삭제({user_id, check_id})
 @api_view(['POST'])
 def delete_item(request):
-    if reques.method == 'POST':
+    if request.method == 'POST':
         check_id = request.POST['check_id']
         user_id = request.POST['user_id']
         item = CheckList.objects.get(pk=check_id)
         item.delete()
-        checklists = CheckList.objects.filter(user=User.objects.get(pk=user_id))
-        data = {'items': checklists}
+        checklists = list(CheckList.objects.filter(user=User.objects.get(pk=user_id)))
+        result = []
+        for item in checklists:
+            serializer = CheckListSerializer(item)
+            result.append(serializer.data)
+        data = {'items': result}
         return Response(data=data, status=status.HTTP_200_OK)
 
 # 해당 체크리스트 아이템 수정({user_id, check_id, content})
 @api_view(['POST'])
 def edit_item(request):
-    if reques.method == 'POST':
+    if request.method == 'POST':
         check_id = request.POST['check_id']
         user_id = request.POST['user_id']
         content = request.POST['content']
         item = CheckList.objects.get(pk=check_id)
         item.content = content
         item.save()
-        checklists = CheckList.objects.filter(user=User.objects.get(pk=user_id))
-        data = {'items': checklists}
+        checklists = list(CheckList.objects.filter(user=User.objects.get(pk=user_id)))
+        result = []
+        for item in checklists:
+            serializer = CheckListSerializer(item)
+            result.append(serializer.data)
+        data = {'items': result}
         return Response(data=data, status=status.HTTP_200_OK)

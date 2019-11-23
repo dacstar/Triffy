@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from api.models import Profile, CheckList, Calendar, Post, City
 from pytz import timezone
-from api.serializers import CalendarSerializer
+from api.serializers import CalendarSerializer, PostSerializer
 
 
 @api_view((['POST']))
@@ -29,5 +29,24 @@ def write_post(request):
 def post_list(request):
     if request.method == 'POST':
         posts = Post.objects.all().order_by('like_users')
-        print(posts)
-        return Response(status=status.HTTP_200_OK)
+        result = []
+        for item in posts:
+            serializer = PostSerializer(item)
+            result.append(serializer.data)
+        return Response(data=result, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def like(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            user = request.user
+            post_id = request.POST['post_id']
+            post = Post.objects.get(pk=post_id)
+            if post.like_users.filter(pk=user.id).exists():
+                post.like_users.remove(user)
+            else:
+                post.like_users.add(user)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+

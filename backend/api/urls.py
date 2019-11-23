@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls import path
 from api.views import auth_views
-from api.views import pre_travel_views, inter_travel_views, rapidapi_views
+from api.views import pre_travel_views, inter_travel_views, post_travel_views, rapidapi_views
 
 urlpatterns = [
     # auth 관련 api
@@ -27,6 +27,9 @@ urlpatterns = [
     path('calendar/delete_item/', inter_travel_views.delete_item, name='delte_calendar'),
     path('calendar/edit_item/', inter_travel_views.edit_item, name='edit_calendar'),
 
+    # post_travel 관련 api
+    path('post/write/', post_travel_views.write_post, name='write_post'),
+    path('post/list/', post_travel_views.post_list, name='post_list'),
     # 항공권 조회 api
     url('show_airplane/', rapidapi_views.show_airplane, name='show_airplane'),
     url('save_airline/', rapidapi_views.save_airline, name='save_airline'),

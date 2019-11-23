@@ -46,7 +46,7 @@
 
 - input
 
-    ![img](images/EMB0000209899a2.bmp)  
+      ![img](images/EMB00005ae4a42f.bmp)  
 
 - output
 

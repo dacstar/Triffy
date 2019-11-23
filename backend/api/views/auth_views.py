@@ -16,6 +16,7 @@ from pytz import timezone
 def signup(request):
     if request.method == 'POST':
         # front에서 회원가입 할 때에 'http://10.3.17.61:8080/v1/account/list'에서 받은 계좌번호를 'http://10.3.17.61:8080/v1/account/deposit/detail'에 요청하여 계좌정보 profiles에 추가하여 받음
+        print("======")
         username = request.POST['username']
         password = request.POST['password']
         age = int(request.POST['age'])

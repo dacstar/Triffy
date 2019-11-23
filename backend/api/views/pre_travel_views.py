@@ -110,3 +110,4 @@ def edit_item(request):
             result.append(serializer.data)
         data = {'items': result}
         return Response(data=data, status=status.HTTP_200_OK)
+
